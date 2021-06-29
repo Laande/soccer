@@ -1,6 +1,6 @@
-# Soccer
+# 4sp visualiser
 
-Show the tiles at 4 blocks away
+Indicates where the ball will be when the ball is kicked 4 spaces
 
 # Install
 

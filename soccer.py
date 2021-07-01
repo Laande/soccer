@@ -2,6 +2,9 @@
 --------------------------------------------------
 '''
 
+ID = "3895"  # global id of the furni
+
+
 # Commands :
 
 SET_TILE = "/ball"
@@ -40,7 +43,7 @@ def spawn_furni():
 
     if not spawn:
         for idd in range(8):
-            ext.send_to_client('{in:ObjectAdd}{i:10000'+str(idd)+'}{i:3895}{i:0}{i:0}{i:0}{s:"100.0"}{s:"0.47"}{i:0}{i:0}{s:"0"}{i:-1}{i:1}{i:25297484}{s:"Lande"}')
+            ext.send_to_client('{in:ObjectAdd}{i:10000'+str(idd)+'}{i:'+ID+'}{i:0}{i:0}{i:0}{s:"100.0"}{s:"0.47"}{i:0}{i:0}{s:"0"}{i:-1}{i:1}{i:25297484}{s:"Lande"}')
         spawn = True
 
 

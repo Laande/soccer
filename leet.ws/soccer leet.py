@@ -11,6 +11,7 @@ TALK = 1314
 RESET = 2312
 USE_FURNI = 99
 FURNI_UPDATE = 3776
+BALL = 3207
 
 ADD_FURNI = "1534"
 REMOVE_FURNI = "2703"
@@ -89,13 +90,23 @@ def speech(msg):
         talk('Indicator off')
 
 
-def update_furni(msg):
-    idd, _, x, y, _, z, _, _, _, _, _, _, _ = msg.packet.read('iiiiissiisiii')
-
+def update(idd, x, y, z):
     if on:
         if idd == id_furni:
             for i in range(8):
                 ext.send_to_client('{l}{h:'+str(FURNI_UPDATE)+'}{i:10000'+str(i)+'}{i:11139}{i:'+str(x+r[i][0])+'}{i:'+str(y+r[i][1])+'}{i:0}{s:"'+z+'"}{s:"0.47"}{i:0}{i:0}{s:"0"}{i:-1}{i:1}{i:25297484}')
+
+
+def update_furni(msg):
+    idd, _, x, y, _, z, _, _, _, _, _, _, _ = msg.packet.read('iiiiissiisiii')
+
+    update(idd, x, y, z)
+
+
+def update_ball(msg):
+    _, _, x, y, _, idd, z, _, _ = msg.packet.read('iiiiiissi')
+
+    update(idd, x, y, z)
 
 
 def talk(txt):
@@ -130,3 +141,4 @@ ext.intercept(Direction.TO_SERVER, speech, TALK)
 ext.intercept(Direction.TO_SERVER, reset, RESET)
 ext.intercept(Direction.TO_SERVER, set_furni, USE_FURNI)
 ext.intercept(Direction.TO_CLIENT, update_furni, FURNI_UPDATE)
+ext.intercept(Direction.TO_CLIENT, update_ball, BALL)
